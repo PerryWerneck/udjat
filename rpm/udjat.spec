@@ -91,10 +91,10 @@ echo "Restarting %{name}"
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%verifyscript
-%verify_permissions -e /etc/%{name}.conf.d/
-%verify_permissions -e /etc/%{name}.xml.d/
-%verify_permissions -e %{_datadir}/%{name}
+#%verifyscript
+#%verify_permissions -e /etc/%{name}.conf.d/
+#%verify_permissions -e /etc/%{name}.xml.d/
+#%verify_permissions -e %{_datadir}/%{name}
 
 %files
 %defattr(-,root,root)
@@ -109,13 +109,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_unitdir}/%{name}.service
 %{_presetdir}/50-%{name}.preset
 
+%exclude %{_sysconfdir}/permissions.d/*
+
 %pre
 %service_add_pre %{name}.service
 
 %post
-%set_permissions /etc/%{name}.conf.d/
-%set_permissions /etc/%{name}.xml.d/
-%set_permissions %{_datadir}/%{name}
+#%set_permissions /etc/%{name}.conf.d/
+#%set_permissions /etc/%{name}.xml.d/
+#%set_permissions %{_datadir}/%{name}
 %service_add_post %{name}.service
 
 %preun
