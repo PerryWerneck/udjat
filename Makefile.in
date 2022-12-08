@@ -201,14 +201,14 @@ install-linux: \
 
 	# Install permissions
 	@$(MKDIR) $(DESTDIR)/$(sysconfdir)/permissions.d
-	@install -m 644 $(srcdir)/sysconf/linux/permissions $(DESTDIR)/$(sysconfdir)/permissions.d/$(PACKAGE_NAME)
+	@install -m 644 $(srcdir)/sysconf/permissions $(DESTDIR)/$(sysconfdir)/permissions.d/$(PACKAGE_NAME)
 
 	# Install systemd
 	@$(MKDIR) $(DESTDIR)@SYSTEMD_UNITDIR@
-	@$(INSTALL_DATA) $(srcdir)/sysconf/linux/systemd.service $(DESTDIR)@SYSTEMD_UNITDIR@/$(PACKAGE_NAME).service
+	@$(INSTALL_DATA) $(srcdir)/sysconf/systemd.service $(DESTDIR)@SYSTEMD_UNITDIR@/$(PACKAGE_NAME).service
 
 	@$(MKDIR) $(DESTDIR)/usr/lib/systemd/system-preset
-	@$(INSTALL_DATA) $(srcdir)/sysconf/linux/systemd.preset $(DESTDIR)@SYSTEMD_PRESETDIR@/50-$(PACKAGE_NAME).preset
+	@$(INSTALL_DATA) $(srcdir)/sysconf/systemd.preset $(DESTDIR)@SYSTEMD_PRESETDIR@/50-$(PACKAGE_NAME).preset
 
 install-windows: \
 	stripped
@@ -218,9 +218,9 @@ install-windows: \
 
 install-conf:
 
-	# Instala configuração
 	@$(MKDIR) $(DESTDIR)/etc/$(PACKAGE_NAME).conf.d
-	@$(INSTALL_DATA) $(srcdir)/conf.d/0*.conf $(DESTDIR)/etc/$(PACKAGE_NAME).conf.d
+	@$(MKDIR) $(DESTDIR)/etc/$(PACKAGE_NAME).xml.d
+#	@$(INSTALL_DATA) $(srcdir)/conf.d/0*.conf $(DESTDIR)/etc/$(PACKAGE_NAME).conf.d
 
 application: \
 	application-@OSNAME@
