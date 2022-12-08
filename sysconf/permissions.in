@@ -1,0 +1,4 @@
+/etc/@PRODUCT_NAME@.conf.d/					root:wheel	0755
+/etc/@PRODUCT_NAME@.xml.d/					root:wheel	0755
+/usr/share/@PRODUCT_NAME@					root:wheel	0755
+

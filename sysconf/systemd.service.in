@@ -1,0 +1,30 @@
+# This file is part of package @PACKAGE_NAME@ @PACKAGE_VERSION@
+#
+# References:
+#
+#	http://www.freedesktop.org/software/systemd/man/systemd.service.html
+#	https://endocode.com/blog/2016/11/04/sandboxfeatures/
+#
+#
+[Unit]
+Description=@PACKAGE_DESCRIPTION@
+Requires=var-run.mount nss-lookup.target network.target
+After=var-run.mount nss-lookup.target network.target
+
+# https://endocode.com/blog/2016/11/04/sandboxfeatures/
+# ProtectSystem=full
+
+[Service]
+Type=notify
+
+ExecStart=/usr/sbin/@PACKAGE_NAME@
+ExecReload=/usr/bin/kill -HUP $MAINPID
+ExecStop=/usr/bin/kill -TERM $MAINPID
+
+Restart=on-failure
+RestartSec=10s
+WatchdogSec=120
+
+[Install]
+WantedBy=multi-user.target
+
