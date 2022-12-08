@@ -4,6 +4,8 @@
 #
 #	http://www.freedesktop.org/software/systemd/man/systemd.service.html
 #	https://endocode.com/blog/2016/11/04/sandboxfeatures/
+#	https://www.redhat.com/sysadmin/mastering-systemd
+#	https://www.digitalocean.com/community/tutorials/how-to-sandbox-processes-with-systemd-on-ubuntu-20-04
 #
 #
 [Unit]
@@ -11,15 +13,23 @@ Description=@PACKAGE_DESCRIPTION@
 Requires=var-run.mount nss-lookup.target network.target
 After=var-run.mount nss-lookup.target network.target
 
-# https://endocode.com/blog/2016/11/04/sandboxfeatures/
-# ProtectSystem=full
-
 [Service]
 Type=notify
 
 ExecStart=/usr/sbin/@PACKAGE_NAME@
 ExecReload=/usr/bin/kill -HUP $MAINPID
 ExecStop=/usr/bin/kill -TERM $MAINPID
+
+ProtectSystem=strict
+ProtectHome=true
+MemoryDenyWriteExecute=true
+ProtectHostname=true
+NoNewPrivileges=yes
+ProtectClock=yes
+ProtectControlGroups=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+RestrictRealtime=yes
 
 Restart=on-failure
 RestartSec=10s
