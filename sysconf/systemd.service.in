@@ -20,8 +20,13 @@ ExecStart=/usr/sbin/@PACKAGE_NAME@
 ExecReload=/usr/bin/kill -HUP $MAINPID
 ExecStop=/usr/bin/kill -TERM $MAINPID
 
-ProtectSystem=strict
-ProtectHome=true
+ProtectSystem=full
+ReadOnlyDirectories=/
+ReadWriteDirectories=/tmp
+ReadWriteDirectories=-/var/log/@PACKAGE_NAME@
+ReadWriteDirectories=-/var/cache/@PACKAGE_NAME@
+ReadWriteDirectories=-/usr/share/@PACKAGE_NAME@
+
 MemoryDenyWriteExecute=true
 ProtectHostname=true
 NoNewPrivileges=yes
