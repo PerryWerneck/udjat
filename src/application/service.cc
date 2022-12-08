@@ -27,13 +27,13 @@
 
 //---[ Implement ]------------------------------------------------------------------------------------------
 
-//#ifdef DEBUG
-//Service::Service() : SystemService{"./xml.d"} {
-//}
-//#else
+#ifdef DEBUG
+Service::Service() : SystemService{"./xml.d"} {
+}
+#else
 Service::Service() : SystemService{} {
 }
-//#endif // DEBUG
+#endif // DEBUG
 
 Service::~Service() {
 	Udjat::Module::unload();
