@@ -220,6 +220,8 @@ install-conf:
 
 	@$(MKDIR) $(DESTDIR)/etc/$(PACKAGE_NAME).conf.d
 	@$(MKDIR) $(DESTDIR)/etc/$(PACKAGE_NAME).xml.d
+	@$(MKDIR) $(DESTDIR)/$(datarootdir)/$(PACKAGE_NAME)
+	
 #	@$(INSTALL_DATA) $(srcdir)/conf.d/0*.conf $(DESTDIR)/etc/$(PACKAGE_NAME).conf.d
 
 application: \
