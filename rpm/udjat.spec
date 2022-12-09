@@ -86,6 +86,10 @@ echo "Restarting %{name}"
 echo "Restarting %{name}"
 %{_sbindir}/rc%{name} restart
 
+%transfiletrigger -- %{module_path}/*.so
+echo "Restarting %{name}"
+%{_sbindir}/rc%{name} restart
+
 %endif
 
 %clean

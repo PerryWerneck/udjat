@@ -21,11 +21,13 @@ ExecReload=/usr/bin/kill -HUP $MAINPID
 ExecStop=/usr/bin/kill -TERM $MAINPID
 
 ProtectSystem=full
+
 ReadOnlyDirectories=/
-ReadWriteDirectories=/tmp
 ReadWriteDirectories=-/var/log/@PACKAGE_NAME@
 ReadWriteDirectories=-/var/cache/@PACKAGE_NAME@
 ReadWriteDirectories=-/usr/share/@PACKAGE_NAME@
+
+PrivateTmp=yes
 
 MemoryDenyWriteExecute=true
 ProtectHostname=true
