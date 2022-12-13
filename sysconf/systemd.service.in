@@ -26,6 +26,7 @@ ReadOnlyDirectories=/
 ReadWriteDirectories=-/var/log/@PACKAGE_NAME@
 ReadWriteDirectories=-/var/cache/@PACKAGE_NAME@
 ReadWriteDirectories=-/usr/share/@PACKAGE_NAME@
+ReadWriteDirectories=-/run
 
 PrivateTmp=yes
 
