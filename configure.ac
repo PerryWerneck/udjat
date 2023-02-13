@@ -80,7 +80,7 @@ case "$host" in
 		EXEEXT=".exe"
 		OSNAME="windows"
 
-		CFLAGS="$CFLAGS -D_WIN32_WINNT=0x0600"
+		CFLAGS="$CFLAGS "
 		LIBS="$LIBS -lws2_32"
 
 		app_win32_revision=$(date +%y.%m.%d.%H)

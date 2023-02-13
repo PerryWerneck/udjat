@@ -28,25 +28,25 @@
 //---[ Implement ]------------------------------------------------------------------------------------------
 
 #ifdef DEBUG
-Service::Service() : SystemService{"./xml.d"} {
+::Service::Service() : SystemService{"./xml.d"} {
 }
 #else
-Service::Service() : SystemService{} {
+::Service::Service() : SystemService{} {
 }
 #endif // DEBUG
 
-Service::~Service() {
+::Service::~Service() {
 	Udjat::Module::unload();
 }
 
-void Service::init() {
+void ::Service::init() {
 
 	SystemService::init();
 	info() << "Running build " << STRINGIZE_VALUE_OF(BUILD_DATE) << endl;
 
 }
 
-void Service::deinit() {
+void ::Service::deinit() {
 
 	info() << "Deinitializing" << endl;
 

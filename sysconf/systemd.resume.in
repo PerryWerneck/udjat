@@ -1,0 +1,21 @@
+# This file is part of package @PACKAGE_NAME@ @PACKAGE_VERSION@
+#
+# References:
+#
+#	http://www.freedesktop.org/software/systemd/man/systemd.service.html
+#	https://www.redhat.com/sysadmin/mastering-systemd
+#	https://gist.github.com/naftulikay/9f8a6c781ba58b0700339d30e3aa3dce
+#
+#
+[Unit]
+Description=@PACKAGE_DESCRIPTION@ (On resume)
+After=suspend.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/@PACKAGE_NAME@ --wake-up
+StandardOutput=syslog
+
+[Install]
+WantedBy=suspend.target
+

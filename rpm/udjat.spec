@@ -98,6 +98,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 
+%license LICENSE
+%doc README.md
+
 %{_sbindir}/%{name}
 %{_sbindir}/rc%{name}
 
