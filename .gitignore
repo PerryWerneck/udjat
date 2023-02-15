@@ -72,5 +72,6 @@ version.h
 permissions
 systemd.preset
 systemd.service
+libtool
 
 

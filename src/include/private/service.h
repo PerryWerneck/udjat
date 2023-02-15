@@ -34,8 +34,8 @@
 	Service();
 	virtual ~Service();
 
-	void init() override;
+	int init(const char *definitions) override;
 
-	void deinit() override;
+	int deinit(const char *definitions) override;
 
  } ;
