@@ -74,6 +74,14 @@ AC_SUBST(PACKAGE_RELEASE,"$app_cv_release")
 AC_SUBST(PACKAGE_MAJOR_RELEASE,$app_rls_major)
 AC_SUBST(PACKAGE_MINOR_RELEASE,$app_rls_minor)
 
+app_cv_product=`$PKG_CONFIG --variable=product_name libudjat`
+AC_DEFINE_UNQUOTED(PRODUCT_NAME, $app_cv_product, [The product name])
+AC_SUBST(PRODUCT_NAME,$app_cv_product)
+
+app_cv_product=`$PKG_CONFIG --variable=product_id libudjat`
+AC_DEFINE_UNQUOTED(PRODUCT_DOMAIN, $app_cv_product, [The product name])
+AC_SUBST(PRODUCT_DOMAIN,$app_cv_product)
+
 dnl ---------------------------------------------------------------------------
 dnl Check for OS specifics
 dnl ---------------------------------------------------------------------------
