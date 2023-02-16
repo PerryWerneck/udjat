@@ -107,7 +107,7 @@ case "$host" in
 		AC_PATH_TOOL([ZIP], [zip], [no])
 		AC_CONFIG_FILES(src/os/windows/resources.rc)
 		AC_CONFIG_FILES(src/os/windows/app-manifest.xml)
-		AC_CONFIG_FILES(win/userinfo.nsi)
+dnl		AC_CONFIG_FILES(win/udjat.nsi)
 		;;
 
  	*)
