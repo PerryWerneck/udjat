@@ -23,6 +23,9 @@ AM_INIT_AUTOMAKE
 dnl Check for iconv
 AM_ICONV
 
+LT_INIT
+AC_CONFIG_MACRO_DIRS([m4])
+
 dnl Set gettext version
 AM_GNU_GETTEXT_VERSION([0.14])
 
@@ -71,6 +74,14 @@ AC_SUBST(PACKAGE_RELEASE,"$app_cv_release")
 AC_SUBST(PACKAGE_MAJOR_RELEASE,$app_rls_major)
 AC_SUBST(PACKAGE_MINOR_RELEASE,$app_rls_minor)
 
+app_cv_product=`$PKG_CONFIG --variable=product_name libudjat`
+AC_DEFINE_UNQUOTED(PRODUCT_NAME, $app_cv_product, [The product name])
+AC_SUBST(PRODUCT_NAME,$app_cv_product)
+
+app_cv_product=`$PKG_CONFIG --variable=product_id libudjat`
+AC_DEFINE_UNQUOTED(PRODUCT_DOMAIN, $app_cv_product, [The product name])
+AC_SUBST(PRODUCT_DOMAIN,$app_cv_product)
+
 dnl ---------------------------------------------------------------------------
 dnl Check for OS specifics
 dnl ---------------------------------------------------------------------------
@@ -80,7 +91,7 @@ case "$host" in
 		EXEEXT=".exe"
 		OSNAME="windows"
 
-		CFLAGS="$CFLAGS -D_WIN32_WINNT=0x0600"
+		CFLAGS="$CFLAGS "
 		LIBS="$LIBS -lws2_32"
 
 		app_win32_revision=$(date +%y.%m.%d.%H)
@@ -104,7 +115,7 @@ case "$host" in
 		AC_PATH_TOOL([ZIP], [zip], [no])
 		AC_CONFIG_FILES(src/os/windows/resources.rc)
 		AC_CONFIG_FILES(src/os/windows/app-manifest.xml)
-		AC_CONFIG_FILES(win/userinfo.nsi)
+dnl		AC_CONFIG_FILES(win/udjat.nsi)
 		;;
 
  	*)

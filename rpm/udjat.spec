@@ -20,7 +20,7 @@
 %define module_path %(pkg-config --variable=module_path libudjat)
 
 Name: udjat
-Summary: Udjat main service
+Summary: Main application for %{product_name}
 
 Version: 0.0.0
 Release: 0
@@ -47,13 +47,25 @@ BuildRequires:	pkgconfig(systemd)
 BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(libudjat)
 
-%systemd_requires
-
 PreReq:			coreutils
 PreReq:			permissions
 
 %description
 Main service for udjat, requires a configuration and modules to work.
+
+%package systemd
+Summary:		SystemD service files for %{name}
+
+Provides: %{name}-service
+Conflicts: otherproviders(%{name}-service)
+
+Enhances: %{name}
+Requires: %{name} = %{version}
+
+%systemd_requires
+
+%description systemd
+Provides systemd service files for %{name}
 
 #---------------------------------------------------------------------------------
 
@@ -98,39 +110,44 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 
-%{_sbindir}/%{name}
-%{_sbindir}/rc%{name}
+%license LICENSE
+%doc README.md
+
+%exclude /etc/%{name}.conf.d/
 
 %dir %attr(755,root,wheel) %{_datadir}/%{name}
-%dir %attr(755,root,wheel) /etc/%{name}.conf.d/
+#%dir %attr(755,root,wheel) /etc/%{name}.conf.d/
 %dir %attr(755,root,wheel) /etc/%{name}.xml.d/
-
-%{_unitdir}/%{name}.service
-%{_presetdir}/50-%{name}.preset
 
 %config(noreplace) /etc/%{name}.conf.d/*.conf
 
 %exclude %{_sysconfdir}/permissions.d/*
 
-%pre
+%files systemd
+%{_sbindir}/%{name}
+%{_sbindir}/rc%{name}
+%{_unitdir}/%{name}.service
+%{_presetdir}/50-%{name}.preset
+
+%pre systemd
 %service_add_pre %{name}.service
 
-%post
+%post systemd
 %service_add_post %{name}.service
 
-%preun
+%preun systemd
 %service_del_preun %{name}.service
 
-%postun
+%postun systemd
 %service_del_postun %{name}.service
 
-%pretrans
+%pretrans systemd
 if [ -x /usr/sbin/rc%{name} ]; then
 	echo "Stopping %{name}"
 	/usr/sbin/rc%{name} stop &
 fi
 
-%posttrans
+%posttrans systemd
 # Só reinicio no final da transação.
 if [ -x /usr/sbin/rc%{name} ]; then
 	echo "Restarting %{name}"

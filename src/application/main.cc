@@ -19,6 +19,7 @@
 
  #include <config.h>
  #include <private/service.h>
+ #include <udjat/tools/logger.h>
  #include <iostream>
 
  using namespace std;
@@ -29,7 +30,12 @@ int main(int argc, char **argv) {
 
 	try {
 
-		return Service().run(argc,argv);
+#ifdef DEBUG
+		Udjat::Logger::verbosity(9);
+		return Service{}.run(argc,argv,"./xml.d");
+#else
+		return Service{}.run(argc,argv);
+#endif // DEBUG
 
 	} catch(const std::exception &e) {
 

@@ -27,31 +27,23 @@
 
 //---[ Implement ]------------------------------------------------------------------------------------------
 
-#ifdef DEBUG
-Service::Service() : SystemService{"./xml.d"} {
+::Service::Service() : SystemService{} {
 }
-#else
-Service::Service() : SystemService{} {
-}
-#endif // DEBUG
 
-Service::~Service() {
+::Service::~Service() {
 	Udjat::Module::unload();
 }
 
-void Service::init() {
+int ::Service::init(const char *definitions) {
 
-	SystemService::init();
 	info() << "Running build " << STRINGIZE_VALUE_OF(BUILD_DATE) << endl;
 
+	return SystemService::init(definitions);
 }
 
-void Service::deinit() {
+int ::Service::deinit(const char *definitions) {
 
 	info() << "Deinitializing" << endl;
 
-	ThreadPool::getInstance().wait(); // Just in case.
-	SystemService::deinit();
-	Module::unload();
-
+	return SystemService::deinit(definitions);
 }

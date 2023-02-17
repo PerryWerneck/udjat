@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+    <assemblyIdentity
+        version="@PACKAGE_MAJOR_VERSION@.@PACKAGE_MINOR_VERSION@"
+        processorArchitecture="*"
+        name="@PRODUCT_DOMAIN@.service"
+        type="win32"
+    />
+    <description>Core library for @PRODUCT_NAME@</description>
+</assembly>
+
