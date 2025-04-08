@@ -31,7 +31,7 @@
  /// @brief Main Service
  class Service : public Udjat::SystemService {
  public:
-	Service();
+	Service(int argc, char **argv);
 	virtual ~Service();
 
 	int init(const char *definitions) override;

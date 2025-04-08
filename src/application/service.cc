@@ -27,7 +27,7 @@
 
 //---[ Implement ]------------------------------------------------------------------------------------------
 
-::Service::Service() : SystemService{} {
+::Service::Service(int argc, char **argv) : SystemService{argc,argv} {
 }
 
 ::Service::~Service() {

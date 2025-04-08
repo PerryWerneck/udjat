@@ -32,9 +32,9 @@ int main(int argc, char **argv) {
 
 #ifdef DEBUG
 		Udjat::Logger::verbosity(9);
-		return Service{}.run(argc,argv,"./xml.d");
+		return Service{argc,argv}.run("./xml.d");
 #else
-		return Service{}.run(argc,argv);
+		return Service{argc,argv}.run();
 #endif // DEBUG
 
 	} catch(const std::exception &e) {
